@@ -47,11 +47,6 @@ TASKS = [
      "ok_re": re.compile(r"签到成功")},
     {"name": "travel", "script": os.path.join(ROOT, "workbuddy-travel", "multi_travel.py"), "args": [],
      "log": os.path.join(ROOT, "workbuddy-travel", "multi_travel.log"), "mode": "travel"},
-    # 豆包工作：脚本内部有只读探测+每日1次硬限制，无活动投放视为已处理
-    {"name": "doubao", "script": os.path.join(ROOT, "doubao-work-checkin", "dw_checkin.py"), "args": [],
-     "log": os.path.join(ROOT, "doubao-work-checkin", "dw_checkin.log"), "mode": "exit",
-     "ok_re": re.compile(r"签到成功|已签到"),
-     "settled_re": re.compile(r"无活动投放|已尝试过签到")},
     # ima 每日登录福利：脚本内部先只读查询，状态=已领取时不发签到请求
     {"name": "ima", "script": os.path.join(ROOT, "ima-checkin", "ima_checkin.py"), "args": [],
      "log": os.path.join(ROOT, "ima-checkin", "ima-checkin.log"), "mode": "exit",

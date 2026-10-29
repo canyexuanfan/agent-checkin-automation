@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ima「每日登录福利」自动签到（无需客户端运行，纯 HTTP）
 
-流程（安全纪律与豆包签到一致）：
+流程（幂等安全纪律）：
   1) refresh_token 换 access token（等效客户端打开，无风险）
   2) get_activity_info 只读查询今日状态
   3) status==3(可领取) 才发 check_in；status==2 视为已签到，绝不重复请求

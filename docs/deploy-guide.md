@@ -3,7 +3,7 @@
 ## 0. 环境
 
 - Windows 10/11，Python 3.10+
-- `pip install cryptography`（ima / 豆包 / dumate 的本地凭据解密需要）
+- `pip install cryptography`（ima / dumate 的本地凭据解密需要）
 - 建议把整个仓库放到固定目录（下文以 `%USERPROFILE%\agent-checkin-automation` 为例）
 
 ## 1. 各平台凭据准备
@@ -23,13 +23,6 @@
 ### 宠物旅行（workbuddy-travel/）
 需要 `~/.wb-switch/accounts.json`（多账号管理工具保存的 token 列表）；
 只有明文 token 的账号也能跑，加密信封 token 需自备 `wb_auth_decrypt.py` 助手放同目录。
-
-### 豆包工作台（doubao-work-checkin/）
-1. 装有豆包工作台客户端并登录
-2. `python decrypt_all_profiles.py` → 生成 `cookies_default.json`（已 gitignore）
-3. `copy device.example.json device.json`，从客户端任一带签名请求的 URL query 里抄
-   `web_id` / `tea_uuid` / `web_tab_id` 填入
-4. `python dw_checkin.py` 验证
 
 ### 腾讯 ima（ima-checkin/）
 1. 本机 ima 客户端保持登录
@@ -64,7 +57,7 @@ Register-ScheduledTask -TaskName "ima每日算力签到" -Action $action -Trigge
 每个脚本把结果追加写到同目录 `*.log`（UTF-8，`[时间] 内容` 格式），
 supervisor 用"成功标记 + 退出码"判定当天是否成功：
 - 成功标记：`签到成功 / 已签到 / 领取成功 / 已派出` 等
-- 豆包与 ima 有"只读探测"前置：无活动投放、今日已领时视为已处理，不发任何签到请求
+- ima 有"只读探测"前置：今日已领时视为已处理，不发任何签到请求
 
 ## 4. 安全注意事项
 

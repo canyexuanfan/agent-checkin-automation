@@ -12,7 +12,6 @@
 | `minimax-checkin/` | MiniMax Code | 每日积分 | `%APPDATA%\MiniMax` 配置/auth store |
 | `dumate-checkin/` | 百度搭子 DuMate | 每日积分 | `%APPDATA%\qianfan-desktop-app` 加密 cookie（本地解密） |
 | `workbuddy-travel/` | WorkBuddy 宠物旅行 | 派出/领取 | `~/.wb-switch/accounts.json` |
-| `doubao-work-checkin/` | 豆包工作台 | 每日奖励 | 客户端 cookie（`decrypt_all_profiles.py` 提取） |
 | `ima-checkin/` | 腾讯 ima | 每日 50 算力 | ima 客户端扩展 Cookie（`extract_credentials.py` 提取） |
 | `supervisor/` | 签到补跑巡检 | — | 无（兜底调度器） |
 
@@ -46,7 +45,6 @@ cd agent-checkin-automation
 ├── minimax-checkin/       # MiniMax 每日积分（含 token 自愈守卫）
 ├── dumate-checkin/        # 百度搭子每日积分
 ├── workbuddy-travel/      # 宠物旅行多账号闭环（先领后派）
-├── doubao-work-checkin/   # 豆包工作台（含 a_bogus 离线签名）
 ├── ima-checkin/           # ima 每日算力（含凭据提取）
 └── docs/                  # 部署指南与计划任务模板
 ```
@@ -55,7 +53,8 @@ cd agent-checkin-automation
 
 - 除 `workbuddy-checkin/` 外，本项目代码以 MIT 许可发布（见 [LICENSE](LICENSE)）
 - `workbuddy-checkin/` 沿用上游作者（同城牛 · 阿may）的许可：仅供个人自用、禁止商用，详见该目录下的 [LICENSE.md](workbuddy-checkin/LICENSE.md)
-- `doubao-work-checkin/abogus.py` 来自开源社区的 a_bogus 纯 Python 实现，版权归原作者
+
+> 说明：豆包工作台签到模块未随本仓库发布（其凭据与设备参数强依赖个人客户端环境，且尚未经作者完整验证），本仓库仅收录已验证可用的模块。
 
 ## 免责声明
 
