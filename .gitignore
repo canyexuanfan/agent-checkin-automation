@@ -1,0 +1,18 @@
+# 凭据与本地状态（绝不入库）
+credentials.json
+ima_creds.json
+token.json
+auth.json*
+cookies*.json
+device.json
+dw_state.json
+supervisor_state.json
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# 临时与调试产物
+*.png
+*.tmp

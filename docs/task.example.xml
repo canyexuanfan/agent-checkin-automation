@@ -1,0 +1,40 @@
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Description>签到补跑巡检：扫描当天各签到日志，未成功的自动补跑（导入前把下方脚本路径改成你的实际安装路径）</Description>
+  </RegistrationInfo>
+  <Triggers>
+    <CalendarTrigger id="t1">
+      <ScheduleByDay><DaysInterval>1</DaysInterval></ScheduleByDay>
+      <StartBoundary>2026-10-23T00:45:00+08:00</StartBoundary>
+    </CalendarTrigger>
+    <CalendarTrigger id="t2">
+      <ScheduleByDay><DaysInterval>1</DaysInterval></ScheduleByDay>
+      <StartBoundary>2026-10-23T08:30:00+08:00</StartBoundary>
+    </CalendarTrigger>
+    <CalendarTrigger id="t3">
+      <ScheduleByDay><DaysInterval>1</DaysInterval></ScheduleByDay>
+      <StartBoundary>2026-10-23T12:45:00+08:00</StartBoundary>
+    </CalendarTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <GroupId>S-1-5-32-545</GroupId>
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>LeastPrivilege</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <ExecutionTimeLimit>PT2H</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>pythonw.exe</Command>
+      <Arguments>C:\path\to\agent-checkin-automation\supervisor\supervisor.py</Arguments>
+    </Exec>
+  </Actions>
+</Task>
