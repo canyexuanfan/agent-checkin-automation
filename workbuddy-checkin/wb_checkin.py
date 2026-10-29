@@ -14,7 +14,7 @@ WorkBuddy 每日积分自动签到（Windows / macOS 通用，同一份脚本两
     macOS    ~/Library/Application Support/CodeBuddyExtension/Data/Public/auth/
 只在本地读取，不上传任何数据。
 
-完整说明见同目录《自动领取workBuddy积分的脚本.md》。
+完整说明见同目录 guide.md。
 
 ---
 出品：同城牛 · 阿may（2026-09-08）

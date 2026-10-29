@@ -30,7 +30,7 @@ git clone https://github.com/canyexuanfan/agent-checkin-automation.git
 cd agent-checkin-automation
 ```
 
-每个子目录是一个独立工具，各自的使用说明见 `docs/部署指南.md` 与脚本头部注释。典型部署：
+每个子目录是一个独立工具，各自的使用说明见 `docs/deploy-guide.md` 与脚本头部注释。典型部署：
 
 1. 安装 Python 3.10+（`cryptography` 按需 `pip install cryptography`）
 2. 按指南准备各平台的本地凭据文件
