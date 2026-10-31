@@ -22,10 +22,8 @@ import subprocess
 import sys
 import datetime
 
-# Python 解释器（pythonw 静默运行）；按本机环境修改
-PY = sys.executable
+PY = r"C:\Users\wzm33\.workbuddy\binaries\python\versions\3.13.12\pythonw.exe"
 DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(DIR)  # 各签到脚本按子目录与本文件同级存放
 STATE_PATH = os.path.join(DIR, "supervisor_state.json")
 SLOG = os.path.join(DIR, "supervisor.log")
 PASSES = 3          # 最多巡检轮数（首轮 + 2 轮补跑）
@@ -36,20 +34,28 @@ TRAVEL_OK_RE = re.compile(r"已派出|旅行中|已达上限|领取旅行奖励"
 TRAVEL_BAD_RE = re.compile(r"查询旅行状态失败|派遣失败|领取失败|token 已过期|缺少可用 token")
 
 TASKS = [
-    {"name": "wb", "script": os.path.join(ROOT, "workbuddy-checkin", "wb_checkin.py"), "args": ["--verbose"],
-     "log": os.path.join(ROOT, "workbuddy-checkin", "checkin.log"), "mode": "exit",
+    {"name": "wb", "script": r"C:\tools\wb-checkin\wb_checkin.py", "args": ["--verbose"],
+     "log": r"C:\tools\wb-checkin\checkin.log", "mode": "exit",
      "ok_re": re.compile(r"签到成功|已签到")},
-    {"name": "minimax", "script": os.path.join(ROOT, "minimax-checkin", "minimax_checkin.py"), "args": [],
-     "log": os.path.join(ROOT, "minimax-checkin", "minimax-checkin.log"), "mode": "exit",
+    {"name": "minimax", "script": r"C:\tools\minimax-checkin\minimax_checkin.py", "args": [],
+     "log": r"C:\tools\minimax-checkin\minimax-checkin.log", "mode": "exit",
      "ok_re": re.compile(r"签到成功|已签到")},
-    {"name": "dumate", "script": os.path.join(ROOT, "dumate-checkin", "dumate_checkin.py"), "args": [],
-     "log": os.path.join(ROOT, "dumate-checkin", "dumate-checkin.log"), "mode": "exit",
+    {"name": "dumate", "script": r"C:\tools\dumate-checkin\dumate_checkin.py", "args": [],
+     "log": r"C:\tools\dumate-checkin\dumate-checkin.log", "mode": "exit",
      "ok_re": re.compile(r"签到成功")},
-    {"name": "travel", "script": os.path.join(ROOT, "workbuddy-travel", "multi_travel.py"), "args": [],
-     "log": os.path.join(ROOT, "workbuddy-travel", "multi_travel.log"), "mode": "travel"},
+    {"name": "travel", "script": r"C:\tools\workbuddy-travel\multi_travel.py", "args": [],
+     "log": r"C:\tools\workbuddy-travel\multi_travel.log", "mode": "travel"},
+    # 豆包工作：只读探测先行+每日1次签到硬限制（脚本内部控制）。
+    # 注意：「无活动投放」不视为当日完成——活动投放时机不固定（10-29 白天才出现），
+    # 每轮巡检都重新只读探测一次（纯读调用，等同打开面板，无风控风险），
+    # 以免错过白天出现的签到绿灯。「已尝试过签到」仍视为当日终态。
+    {"name": "doubao", "script": r"C:\tools\doubao-work-checkin\dw_checkin.py", "args": [],
+     "log": r"C:\tools\doubao-work-checkin\dw_checkin.log", "mode": "exit",
+     "ok_re": re.compile(r"签到成功|已签到"),
+     "settled_re": re.compile(r"已尝试过签到")},
     # ima 每日登录福利：脚本内部先只读查询，状态=已领取时不发签到请求
-    {"name": "ima", "script": os.path.join(ROOT, "ima-checkin", "ima_checkin.py"), "args": [],
-     "log": os.path.join(ROOT, "ima-checkin", "ima-checkin.log"), "mode": "exit",
+    {"name": "ima", "script": r"C:\tools\ima-checkin\ima_checkin.py", "args": [],
+     "log": r"C:\tools\ima-checkin\ima-checkin.log", "mode": "exit",
      "ok_re": re.compile(r"签到成功|已签到|领取成功")},
 ]
 
